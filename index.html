@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="forge">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forge One — Rewrite what a phone can be</title>
+  <meta name="description" content="Forge One. A new kind of phone, compiled from the ground up." />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet" type="text/css" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            forge: {
+              black: '#050505',
+              ink: '#0c0c0c',
+              muted: '#8a8a8a',
+              orange: '#FF4D00',
+              glow: '#FF6A1A',
+            },
+          },
+          fontFamily: {
+            display: ['"Space Grotesk"', 'sans-serif'],
+            body: ['Outfit', 'sans-serif'],
+          },
+        },
+      },
+      daisyui: {
+        themes: [
+          {
+            forge: {
+              primary: '#FF4D00',
+              secondary: '#ffffff',
+              accent: '#FF6A1A',
+              neutral: '#0c0c0c',
+              'base-100': '#050505',
+              'base-200': '#0c0c0c',
+              'base-300': '#161616',
+              info: '#ffffff',
+              success: '#FF4D00',
+              warning: '#FF6A1A',
+              error: '#FF4D00',
+            },
+          },
+        ],
+      },
+    };
+  </script>
+
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="bg-forge-black text-white font-body overflow-x-hidden" data-theme="forge">
+
+  <!-- NAV -->
+  <header class="navbar fixed top-0 z-50 px-4 md:px-8 transition-all duration-300" id="site-nav">
+    <div class="navbar-start">
+      <a href="#top" class="brand-mark font-display text-xl font-bold tracking-tight">
+        Forge<span class="text-forge-orange">.</span>
+      </a>
+    </div>
+    <div class="navbar-center hidden lg:flex">
+      <ul class="menu menu-horizontal gap-1 px-1 text-sm text-white/70">
+        <li><a href="#design" class="hover:text-white">Design</a></li>
+        <li><a href="#display" class="hover:text-white">Display</a></li>
+        <li><a href="#camera" class="hover:text-white">Camera</a></li>
+        <li><a href="#chip" class="hover:text-white">Chip</a></li>
+        <li><a href="#battery" class="hover:text-white">Battery</a></li>
+        <li><a href="#specs" class="hover:text-white">Specs</a></li>
+      </ul>
+    </div>
+    <div class="navbar-end gap-2">
+      <a href="#preorder" class="btn btn-sm border-0 bg-forge-orange text-white hover:bg-forge-glow">Pre-order</a>
+      <div class="dropdown dropdown-end lg:hidden">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-sm" aria-label="Menu">☰</div>
+        <ul tabindex="0" class="menu dropdown-content z-[60] mt-3 w-52 rounded-box bg-forge-ink p-2 shadow-xl border border-white/10">
+          <li><a href="#design">Design</a></li>
+          <li><a href="#display">Display</a></li>
+          <li><a href="#camera">Camera</a></li>
+          <li><a href="#chip">Chip</a></li>
+          <li><a href="#battery">Battery</a></li>
+          <li><a href="#specs">Specs</a></li>
+          <li><a href="#preorder">Pre-order</a></li>
+        </ul>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero-stage relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+      <div class="hero-grid absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+      <div class="hero-orb absolute pointer-events-none" aria-hidden="true"></div>
+
+      <div class="relative z-10 w-full max-w-6xl mx-auto px-6 pt-28 pb-16 text-center">
+        <p class="hero-eyebrow font-display text-forge-orange text-sm md:text-base tracking-[0.35em] uppercase mb-6 opacity-0">
+          Introducing
+        </p>
+        <h1 class="hero-title font-display font-bold leading-[0.9] tracking-tight opacity-0">
+          <span class="block text-5xl sm:text-7xl md:text-8xl lg:text-9xl">Forge One</span>
+        </h1>
+        <p class="hero-sub mx-auto mt-6 max-w-xl text-lg md:text-xl text-white/65 font-light opacity-0">
+          Built like software. Felt like hardware. The phone compiled for what comes next.
+        </p>
+        <div class="hero-cta mt-10 flex flex-wrap items-center justify-center gap-4 opacity-0">
+          <a href="#preorder" class="btn border-0 bg-forge-orange px-8 text-white hover:bg-forge-glow">Pre-order now</a>
+          <a href="#design" class="btn btn-outline border-white/30 text-white hover:border-forge-orange hover:bg-transparent hover:text-forge-orange">Explore</a>
+        </div>
+      </div>
+
+      <div class="relative z-10 w-full flex justify-center pb-20 px-6">
+        <div id="phone-hero" class="phone-shell opacity-0" aria-hidden="true">
+          <div class="phone-frame">
+            <div class="phone-notch"></div>
+            <div class="phone-screen" id="hero-screen">
+              <canvas id="hero-canvas" width="280" height="560"></canvas>
+            </div>
+            <div class="phone-bar"></div>
+          </div>
+          <div class="phone-glow"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DESIGN -->
+    <section id="design" class="section-block py-28 md:py-36">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="reveal text-center mb-16 md:mb-24">
+          <p class="section-kicker">Aluminum. Recoded.</p>
+          <h2 class="section-title">Design that disappears<br class="hidden md:block" /> into the work.</h2>
+          <p class="section-lead mx-auto">
+            A unibody carved to a single continuous surface. Edges that catch light like a commit history — clean, intentional, irreversible.
+          </p>
+        </div>
+
+        <div class="design-stage reveal relative mx-auto max-w-4xl h-[420px] md:h-[520px]">
+          <div id="design-orbit" class="absolute inset-0">
+            <div class="orbit-ring"></div>
+            <div class="orbit-ring orbit-ring--2"></div>
+            <div class="orbit-dot" data-orbit="0"></div>
+            <div class="orbit-dot" data-orbit="1"></div>
+            <div class="orbit-dot" data-orbit="2"></div>
+            <div class="orbit-dot" data-orbit="3"></div>
+          </div>
+          <div id="phone-design" class="phone-shell phone-shell--side absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div class="phone-frame phone-frame--thin">
+              <div class="phone-screen phone-screen--gradient">
+                <div class="design-lines" id="design-lines"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="reveal mt-16 grid gap-10 md:grid-cols-3 text-center md:text-left">
+          <div>
+            <h3 class="font-display text-xl font-semibold mb-2">7.8 mm</h3>
+            <p class="text-white/55 text-sm leading-relaxed">Thinner profile without sacrificing rigidity. Structural rails borrowed from chassis engineering.</p>
+          </div>
+          <div>
+            <h3 class="font-display text-xl font-semibold mb-2">Ceramic Shield+</h3>
+            <p class="text-white/55 text-sm leading-relaxed">Front glass fused with a nano-ceramic layer. Scratches lose. You win.</p>
+          </div>
+          <div>
+            <h3 class="font-display text-xl font-semibold mb-2">IP68</h3>
+            <p class="text-white/55 text-sm leading-relaxed">Dust. Rain. Accidental dives. Sealed like a production release.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DISPLAY -->
+    <section id="display" class="section-block section-block--bleed py-28 md:py-36 overflow-hidden">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="reveal max-w-3xl mb-14">
+          <p class="section-kicker">ProMotion XDR</p>
+          <h2 class="section-title">A canvas that keeps up<br class="hidden md:block" /> with your frame rate.</h2>
+          <p class="section-lead">
+            6.7″ Super Retina OLED. 1–120 Hz adaptive refresh. Peak brightness that holds outdoors — and holds your attention.
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal relative">
+        <div class="display-ribbon" id="display-ribbon">
+          <div class="ribbon-panel" data-tone="0"></div>
+          <div class="ribbon-panel" data-tone="1"></div>
+          <div class="ribbon-panel" data-tone="2"></div>
+          <div class="ribbon-panel" data-tone="3"></div>
+          <div class="ribbon-panel" data-tone="4"></div>
+          <div class="ribbon-panel" data-tone="5"></div>
+        </div>
+        <div class="absolute inset-0 flex items-center justify-center pointer-events-none">
+          <div class="display-badge font-display text-4xl md:text-6xl font-bold tracking-tight">
+            120<span class="text-forge-orange">Hz</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-6 mt-16 grid gap-8 md:grid-cols-3">
+        <div class="reveal feature-stat">
+          <span class="stat-num">2000</span>
+          <span class="stat-unit">nits peak</span>
+        </div>
+        <div class="reveal feature-stat">
+          <span class="stat-num">2,000,000:1</span>
+          <span class="stat-unit">contrast</span>
+        </div>
+        <div class="reveal feature-stat">
+          <span class="stat-num">True Tone</span>
+          <span class="stat-unit">adaptive white balance</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAMERA -->
+    <section id="camera" class="section-block py-28 md:py-36">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="reveal text-center mb-16">
+          <p class="section-kicker">48MP Fusion System</p>
+          <h2 class="section-title">Capture. Compile. Share.</h2>
+          <p class="section-lead mx-auto">
+            Three sensors. One computational pipeline. Photonic Engine that treats every frame like a pull request — reviewed, refined, merged.
+          </p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          <div class="reveal camera-stage relative mx-auto w-full max-w-md aspect-square">
+            <canvas id="camera-canvas" class="w-full h-full rounded-full" width="480" height="480"></canvas>
+            <div class="camera-lens-core absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+              <div class="lens-ring"></div>
+              <div class="lens-ring lens-ring--inner"></div>
+              <div class="lens-pupil"></div>
+            </div>
+          </div>
+
+          <div class="reveal space-y-8">
+            <div class="camera-feature">
+              <h3 class="font-display text-2xl font-semibold mb-2">Main · 48MP</h3>
+              <p class="text-white/55 leading-relaxed">ƒ/1.6 aperture, sensor-shift OIS, and night mode that keeps noise out of the final build.</p>
+            </div>
+            <div class="camera-feature">
+              <h3 class="font-display text-2xl font-semibold mb-2">Ultra Wide · 12MP</h3>
+              <p class="text-white/55 leading-relaxed">120° field of view with macro autofocus down to 2 cm. Detail at every distance.</p>
+            </div>
+            <div class="camera-feature">
+              <h3 class="font-display text-2xl font-semibold mb-2">Telephoto · 12MP</h3>
+              <p class="text-white/55 leading-relaxed">3× optical zoom. 15× digital with Zero Shutter Lag. Distance becomes optional.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CHIP -->
+    <section id="chip" class="section-block py-28 md:py-36 bg-gradient-to-b from-transparent via-forge-ink/80 to-transparent">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <div class="reveal mb-16">
+          <p class="section-kicker">F1 Neural Chip</p>
+          <h2 class="section-title">Performance, hot-patched<br class="hidden md:block" /> into silicon.</h2>
+          <p class="section-lead mx-auto">
+            A 3nm architecture with a 16-core Neural Engine. On-device AI that feels instant — because latency is a bug we refused to ship.
+          </p>
+        </div>
+
+        <div class="reveal chip-visual relative mx-auto max-w-lg h-64 md:h-80 mb-16">
+          <div id="chip-grid" class="chip-grid"></div>
+          <div class="chip-core absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 font-display font-bold text-forge-orange text-3xl md:text-5xl">
+            F1
+          </div>
+        </div>
+
+        <div class="reveal grid gap-8 sm:grid-cols-3 max-w-3xl mx-auto">
+          <div>
+            <p class="font-display text-3xl font-bold text-white">40%</p>
+            <p class="text-sm text-white/50 mt-1">faster CPU vs last gen</p>
+          </div>
+          <div>
+            <p class="font-display text-3xl font-bold text-white">55%</p>
+            <p class="text-sm text-white/50 mt-1">faster GPU workloads</p>
+          </div>
+          <div>
+            <p class="font-display text-3xl font-bold text-white">2×</p>
+            <p class="text-sm text-white/50 mt-1">ML throughput</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- BATTERY -->
+    <section id="battery" class="section-block py-28 md:py-36">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="grid lg:grid-cols-2 gap-14 items-center">
+          <div class="reveal">
+            <p class="section-kicker">All-day. Then some.</p>
+            <h2 class="section-title">Power that outlasts<br class="hidden md:block" /> your backlog.</h2>
+            <p class="section-lead !mx-0 !max-w-md">
+              A denser cell chemistry paired with adaptive power scheduling. Video playback for 29 hours. Fast charge to 50% in 20 minutes.
+            </p>
+            <ul class="mt-8 space-y-3 text-white/60 text-sm">
+              <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rounded-full bg-forge-orange"></span> MagForge wireless · 15W</li>
+              <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rounded-full bg-forge-orange"></span> USB-C PD · up to 45W</li>
+              <li class="flex items-center gap-3"><span class="h-1.5 w-1.5 rounded-full bg-forge-orange"></span> Reverse charge for earbuds</li>
+            </ul>
+          </div>
+
+          <div class="reveal flex justify-center">
+            <div class="battery-widget" id="battery-widget">
+              <div class="battery-outline">
+                <div class="battery-fill" id="battery-fill"></div>
+                <div class="battery-percent font-display font-bold" id="battery-percent">0%</div>
+              </div>
+              <div class="battery-nub"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- COLORS -->
+    <section id="colors" class="section-block py-24 md:py-32">
+      <div class="max-w-6xl mx-auto px-6 text-center">
+        <div class="reveal mb-14">
+          <p class="section-kicker">Finishes</p>
+          <h2 class="section-title">Pick your release channel.</h2>
+        </div>
+
+        <div class="reveal flex flex-wrap justify-center gap-6 md:gap-10" id="color-swatches">
+          <button type="button" class="color-swatch is-active" data-color="#1a1a1a" data-name="Obsidian" aria-label="Obsidian">
+            <span class="swatch-orb" style="background:#1a1a1a; box-shadow: inset 0 0 0 1px rgba(255,255,255,.2)"></span>
+            <span class="swatch-label">Obsidian</span>
+          </button>
+          <button type="button" class="color-swatch" data-color="#f5f5f5" data-name="Porcelain" aria-label="Porcelain">
+            <span class="swatch-orb" style="background:#f5f5f5"></span>
+            <span class="swatch-label">Porcelain</span>
+          </button>
+          <button type="button" class="color-swatch" data-color="#FF4D00" data-name="Ignite" aria-label="Ignite">
+            <span class="swatch-orb" style="background:#FF4D00"></span>
+            <span class="swatch-label">Ignite</span>
+          </button>
+          <button type="button" class="color-swatch" data-color="#2a2a2a" data-name="Graphite" aria-label="Graphite">
+            <span class="swatch-orb" style="background:#2a2a2a; box-shadow: inset 0 0 0 1px rgba(255,255,255,.15)"></span>
+            <span class="swatch-label">Graphite</span>
+          </button>
+        </div>
+
+        <div class="reveal mt-14 flex justify-center">
+          <div id="phone-color" class="phone-shell phone-shell--color">
+            <div class="phone-frame" id="color-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen phone-screen--minimal">
+                <span class="font-display text-2xl font-bold tracking-tight">Forge<span class="text-forge-orange">.</span></span>
+              </div>
+              <div class="phone-bar"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SPECS -->
+    <section id="specs" class="section-block py-28 md:py-36">
+      <div class="max-w-4xl mx-auto px-6">
+        <div class="reveal text-center mb-14">
+          <p class="section-kicker">Tech Specs</p>
+          <h2 class="section-title">The changelog.</h2>
+        </div>
+
+        <div class="reveal overflow-x-auto">
+          <table class="table table-zebra w-full specs-table">
+            <tbody>
+              <tr>
+                <th class="font-display">Display</th>
+                <td>6.7″ OLED · 2796×1290 · 120Hz ProMotion XDR</td>
+              </tr>
+              <tr>
+                <th class="font-display">Chip</th>
+                <td>F1 Neural · 3nm · 16-core Neural Engine</td>
+              </tr>
+              <tr>
+                <th class="font-display">Camera</th>
+                <td>48MP Fusion · Ultra Wide · 3× Telephoto</td>
+              </tr>
+              <tr>
+                <th class="font-display">Battery</th>
+                <td>Up to 29 hrs video · MagForge 15W · USB-C 45W</td>
+              </tr>
+              <tr>
+                <th class="font-display">Storage</th>
+                <td>256GB · 512GB · 1TB</td>
+              </tr>
+              <tr>
+                <th class="font-display">Connectivity</th>
+                <td>5G · Wi-Fi 7 · Bluetooth 5.4 · USB-C</td>
+              </tr>
+              <tr>
+                <th class="font-display">Build</th>
+                <td>Aluminum unibody · Ceramic Shield+ · IP68</td>
+              </tr>
+              <tr>
+                <th class="font-display">OS</th>
+                <td>ForgeOS 1.0 — shipping day one</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- PREORDER CTA -->
+    <section id="preorder" class="section-block py-28 md:py-40 relative overflow-hidden">
+      <div class="cta-glow absolute inset-0 pointer-events-none" aria-hidden="true"></div>
+      <div class="relative z-10 max-w-3xl mx-auto px-6 text-center">
+        <div class="reveal">
+          <p class="section-kicker">Ship date · Q4</p>
+          <h2 class="section-title">Ready to deploy?</h2>
+          <p class="section-lead mx-auto mb-10">
+            Pre-order Forge One today. From $999. Free overnight shipping on launch week.
+          </p>
+          <div class="flex flex-wrap justify-center gap-4">
+            <button type="button" class="btn border-0 bg-forge-orange px-10 text-white hover:bg-forge-glow text-base" id="preorder-btn">
+              Pre-order — $999
+            </button>
+            <a href="#specs" class="btn btn-ghost text-white/70 hover:text-white">Compare models</a>
+          </div>
+          <p class="mt-6 text-xs text-white/35" id="preorder-note" hidden>
+            Demo only — this is a static practice site. No payment processed.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-white/10 py-12 px-6">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row md:items-center md:justify-between gap-6">
+      <div>
+        <p class="font-display text-lg font-bold">Forge<span class="text-forge-orange">.</span></p>
+        <p class="text-sm text-white/40 mt-1">Static demo for nginx / Debian practice labs.</p>
+      </div>
+      <div class="flex flex-wrap gap-6 text-sm text-white/45">
+        <a href="#top" class="hover:text-forge-orange">Top</a>
+        <a href="#design" class="hover:text-forge-orange">Design</a>
+        <a href="#camera" class="hover:text-forge-orange">Camera</a>
+        <a href="#specs" class="hover:text-forge-orange">Specs</a>
+        <a href="#preorder" class="hover:text-forge-orange">Pre-order</a>
+      </div>
+      <p class="text-xs text-white/30">© 2026 Forge Labs. Fictional product.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/animejs@3.2.2/lib/anime.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
